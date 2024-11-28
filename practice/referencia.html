@@ -1,0 +1,195 @@
+<html>
+ <head>
+  <title>
+   BRUSTOCK
+  </title>
+  <style>
+   body {
+            background-color: #1A3B6D;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+        .title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            width: 20%;
+            text-align: left;
+            padding: 10px;
+            background-color: #4A6FA5;
+            border: 1px solid #000;
+        }
+        .input-group input, .input-group textarea {
+            width: 75%;
+            padding: 10px;
+            background-color: #A3B9D4;
+            border: 1px solid #000;
+        }
+        .process-group, .sizes-group, .colors-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .process-list, .sizes-list, .colors-input {
+            width: 75%;
+            padding: 10px;
+            background-color: #A3B9D4;
+            border: 1px solid #000;
+            text-align: left;
+        }
+        .process-list ul, .sizes-list table {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .process-list li, .sizes-list td {
+            padding: 5px 0;
+        }
+        .colors-input {
+            display: flex;
+            justify-content: space-between;
+        }
+        .colors-input input {
+            width: 90%;
+            padding: 10px;
+            background-color: #A3B9D4;
+            border: 1px solid #000;
+        }
+        .colors-input .add-color {
+            width: 10%;
+            text-align: center;
+            background-color: #A3B9D4;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .save-icon {
+            margin-top: 20px;
+        }
+        .save-icon img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="title">
+    BRUSTOCK
+   </div>
+   <form id="brustock-form">
+       <div class="input-group">
+        <label for="referencia">
+         REFERENCIA
+        </label>
+        <input id="referencia" type="text"/>
+       </div>
+       <div class="input-group">
+        <label for="descripcion">
+         DESCRIPCION
+        </label>
+        <textarea id="descripcion" rows="3"></textarea>
+       </div>
+       <div class="process-group">
+        <label for="proceso">
+          PROCESO
+        </label>
+        <select id="proceso">
+          <option value="">Seleccione un proceso</option>
+          <option value="BORDADO">BORDADO</option>
+          <option value="ESTAMPADO">ESTAMPADO</option>
+          <option value="COSTURA">COSTURA</option>
+          <option value="TINTORERIA">TINTORERIA</option>
+          <option value="RIBETE">RIBETE</option>
+          <option value="QJAL">QJAL</option>
+          <option value="TERMINADO">TERMINADO</option>
+        </select>
+      </div>
+       <div class="sizes-group">
+        <label for="tallas">
+         TALLAS
+        </label>
+        <div class="sizes-list">
+         <table>
+          <tr>
+           <td><input type="checkbox" value="2J"> 2J</td>
+           <td><input type="checkbox" value="4J"> 4J </td>
+           <td><input type="checkbox" value="6J"> 6J</td>
+           <td><input type="checkbox" value="8J"> 8J</td>
+           <td><input type="checkbox" value="10J"> 10J</td>
+           <td><input type="checkbox" value="12J"> 12J</td>
+           <td><input type="checkbox" value="14J"> 14J</td>
+           <td><input type="checkbox" value="16J"> 16J</td>
+           <td><input type="checkbox" value="22D"> 22D</td>
+           <td><input type="checkbox" value="24D"> 24D</td>
+          </tr>
+          <tr>
+           <td><input type="checkbox" value="6D"> 6D</td>
+           <td><input type="checkbox" value="8D"> 8D</td>
+           <td><input type="checkbox" value="10D"> 10D</td>
+           <td><input type="checkbox" value="12D"> 12D</td>
+           <td><input type="checkbox" value="14D"> 14D</td>
+           <td><input type="checkbox" value="16D"> 16D</td>
+           <td><input type="checkbox" value="18D"> 18D</td>
+           <td><input type="checkbox" value="20D"> 20D</td>
+          </tr>
+          <tr>
+           <td><input type="checkbox" value="28H"> 28H</td>
+           <td><input type="checkbox" value="30H"> 30H</td>
+           <td><input type="checkbox" value="32H"> 32H</td>
+           <td><input type="checkbox" value="34H"> 34H</td>
+           <td><input type="checkbox" value="36H"> 36H</td>
+           <td><input type="checkbox" value="38H"> 38H</td>
+           <td><input type="checkbox" value="40H"> 40H</td>
+           <td><input type="checkbox" value="42H"> 42H</td>
+          </tr>
+         </table>
+        </div>
+       </div>
+       <div class="colors-group">
+        <label for="colores">
+         COLORES
+        </label>
+        <div class="colors-input">
+         <input id="colores" type="text"/>
+         <div class="add-color" onclick="addColor()">+</div>
+         <div id="color-list"></div>
+        </div>
+       </div>
+       <div class="save-icon">
+        <img alt="Save icon" src="..." onclick="saveForm()"/>
+       </div>
+   </form>
+  </div>
+  <script>
+   function addColor() {
+    const colorInput = document.getElementById('colores');
+    const colorList = document.getElementById('color-list');
+    const newColor = colorInput.value.trim();
+    if (newColor) {
+     const colorItem = document.createElement('div');
+     colorItem.textContent = newColor;
+     colorList.appendChild(colorItem);
+     colorInput.value = ''; // Clear the input
+    }
+   }
+
+   function saveForm() {
+    // Logic to save the form data
+    alert('Form saved!');
+   }
+  </script>
+ </body>
+</html>
